@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>click.io</title>
+    <meta name="description" content="click.io: Made By HappyDev.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23111214'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%23ececea' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23e9b35f'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #111214;
+            --surface: #17181b;
+            --line: #26282c;
+            --text: #ececea;
+            --muted: #8d9097;
+            --amber: #e9b35f;
+            --font: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 0 clamp(20px, 5vw, 48px);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--amber);
+            outline-offset: -2px;
+        }
+
+        /* Header */
+        header {
+            padding: clamp(64px, 12vw, 128px) 0 clamp(36px, 6vw, 64px);
+        }
+
+        h1 {
+            font-size: clamp(3.4rem, 12vw, 6.5rem);
+            font-weight: 600;
+            letter-spacing: -0.045em;
+            line-height: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--muted);
+            max-width: 34ch;
+        }
+
+        /* Services: one bordered block, cells separated by hairlines */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .services::after {
+            content: '';
+            background: var(--bg);
+        }
+
+        .service {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 168px;
+            padding: 24px 26px 22px;
+            background: var(--bg);
+            transition: background 0.2s ease;
+        }
+
+        .service:hover {
+            background: var(--surface);
+        }
+
+        .service-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 38ch;
+            flex: 1;
+        }
+
+        .service-open {
+            align-self: flex-end;
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            margin-top: 18px;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            color: var(--muted);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .service-open svg {
+            transition: transform 0.25s ease;
+        }
+
+        .service:hover .service-open {
+            background: var(--text);
+            border-color: var(--text);
+            color: var(--bg);
+        }
+
+        .service:hover .service-open svg {
+            transform: rotate(-45deg);
+        }
+
+
+        /* Donation */
+        .support {
+            margin-top: clamp(48px, 8vw, 88px);
+            padding: clamp(24px, 4vw, 34px);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .support h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 6px;
+        }
+
+        .support p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 46ch;
+        }
+
+        .coffee-btn {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 22px;
+            background: var(--amber);
+            color: #16130c;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 10px;
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        .coffee-btn:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        .coffee-btn:focus-visible {
+            outline-offset: 3px;
+        }
+
+        .coffee-btn .emoji {
+            font-size: 1.15rem;
+            line-height: 1;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            padding: 36px 0 44px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        footer a {
+            color: var(--text);
+            border-bottom: 1px solid var(--line);
+            transition: border-color 0.2s ease;
+        }
+
+        footer a:hover {
+            border-color: var(--muted);
+        }
+
+        footer a:focus-visible {
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 680px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .services::after {
+                display: none;
+            }
+
+            .service {
+                min-height: 0;
+                padding: 22px 22px 20px;
+            }
+
+
+            .support {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .coffee-btn {
+                justify-content: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>click.io</h1>
+            <p class="subtitle">Tutti i nostri servizi, in un unico posto.</p>
+        </header>
+
+        <main>
+            <div class="services">
+                <a class="service" href="https://pietro352.github.io/dropp/" target="_blank" rel="noopener">
+                    <h2 class="service-name">Dropp</h2>
+                    <p class="service-desc">Trasferimento file veloce e sicuro attraverso il web.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+                <a class="service" href="https://pietro352.github.io/transcript/" target="_blank" rel="noopener">
+                    <h2 class="service-name">Transcript</h2>
+                    <p class="service-desc">Trascrizione di audio e video in testo, veloce e accurata.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+                <a class="service" href="https://pietro352.github.io/mp4pure/" target="_blank" rel="noopener">
+                    <h2 class="service-name">Mp4Pure</h2>
+                    <p class="service-desc">Comprimi i tuoi video senza perdere qualità.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+                <a class="service" href="https://pietro352.github.io/mirrorcast/" target="_blank" rel="noopener">
+                    <h2 class="service-name">Mirrorcast</h2>
+                    <p class="service-desc">Condividi e visualizza contenuti in tempo reale.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+                <a class="service" href="https://pietro352.github.io/footscan/" target="_blank" rel="noopener">
+                    <h2 class="service-name">Footscan</h2>
+                    <p class="service-desc">Analisi e statistiche calcistiche.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+                <a class="service" href="https://sunnyweek.lovable.app/" target="_blank" rel="noopener">
+                    <h2 class="service-name">SunnyWeek</h2>
+                    <p class="service-desc">Previsioni meteo avanzate.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+                <a class="service" href="https://github.com/Pietro352/Mailbot" target="_blank" rel="noopener">
+                    <h2 class="service-name">Mailbot</h2>
+                    <p class="service-desc">Le e-mail che rispondono da sole.</p>
+                    <span class="service-open" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span>
+                </a>
+
+            </div>
+
+            <aside class="support" aria-label="Sostieni il progetto">
+                <div>
+                    <h2>Sostieni il progetto</h2>
+                    <p>I nostri servizi sono gratuiti e senza pubblicità. Una piccola donazione ci aiuta a mantenere i server accesi e a sviluppare nuove app.</p>
+                </div>
+                <a class="coffee-btn" href="https://buymeacoffee.com/happydev" target="_blank" rel="noopener noreferrer">
+                    <span>Offrici un caffè</span>
+                    <span class="emoji" aria-hidden="true">☕</span>
+                </a>
+            </aside>
+        </main>
+
+        <footer>
+            <span>Made by HappyDev</span>
+            <span>Hai un problema o una segnalazione? <a href="https://form.jotform.com/261684609665066" target="_blank" rel="noopener">Scrivici</a></span>
+        </footer>
+    </div>
+</body>
+</html>
